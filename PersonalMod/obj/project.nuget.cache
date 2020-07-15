@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "kiksAKa0QtQKYbUjD+n1IGNvvsI+INwcir4MQsCggLnRCgO0L0pKyNFcaRm1LRhWZjou5KkynV5QeRfYK1mg/w==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\raine\\OneDrive\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\PersonalMod\\PersonalMod.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\raine\\.nuget\\packages\\tmodloader.codeassist\\0.1.1\\tmodloader.codeassist.0.1.1.nupkg.sha512"
+  ],
+  "logs": []
+}

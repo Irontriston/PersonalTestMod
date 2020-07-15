@@ -1,0 +1,4 @@
+C:\Users\raine\OneDrive\Documents\My Games\Terraria\ModLoader\Mod Sources\PersonalMod\obj\Debug\net45\PersonalMod.csprojAssemblyReference.cache
+C:\Users\raine\OneDrive\Documents\My Games\Terraria\ModLoader\Mod Sources\PersonalMod\obj\Debug\net45\PersonalMod.AssemblyInfoInputs.cache
+C:\Users\raine\OneDrive\Documents\My Games\Terraria\ModLoader\Mod Sources\PersonalMod\obj\Debug\net45\PersonalMod.AssemblyInfo.cs
+C:\Users\raine\OneDrive\Documents\My Games\Terraria\ModLoader\Mod Sources\PersonalMod\obj\Debug\net45\PersonalMod.csproj.CoreCompileInputs.cache

@@ -1,0 +1,4 @@
+buildIgnore = *.sln, *.csproj, *.user, obj\*, bin\*, .vs\*
+displayName = Personal Mod
+author = Tr1st
+version = 0.1
