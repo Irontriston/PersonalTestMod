@@ -77,7 +77,7 @@ namespace PersonalMod.NeededProperties
 
 		private static VertexStrip _vertexStrip = new VertexStrip();
 
-		private static Dictionary<int, ZenithProfileType> _fractalProfiles = new Dictionary<int, ZenithProfileType>
+		private static Dictionary<int, ZenithProfileType> _ZenithProfiles = new Dictionary<int, ZenithProfileType>
 		{
 			{
 				46,
@@ -159,31 +159,24 @@ namespace PersonalMod.NeededProperties
 
 		private static ZenithProfileType _defaultProfile = new ZenithProfileType(50f, Color.White);
 
-		public static int GetRandomProfileIndex()
-		{
-			List<int> list = _fractalProfiles.Keys.ToList();
-			int index = Main.rand.Next(list.Count);
-			if (list[index] == 3507)
-			{
-				list.RemoveAt(index);
-				index = Main.rand.Next(list.Count);
-			}
-			return list[index];
-		}
 
 		public void Draw(Projectile proj)
 		{
-			ZenithProfileType zenithProfile = GetZenithProfileType((int)proj.ai[1]);
-			MiscShaderData miscShaderData = GameShaders.Misc["Zenith"];
+			ZenithProfileType zenithProfile = GetZenithProfile((int)proj.ai[1]);
+			MiscShaderData miscShaderData = GameShaders.Misc["FinalFractal"];
+			int num = 4;
+			int num2 = 0;
+			int num3 = 0;
+			int num4 = 4;
 			miscShaderData.Apply();
 			_vertexStrip.PrepareStrip(proj.oldPos, proj.oldRot, zenithProfile.colorMethod, zenithProfile.widthMethod, -Main.screenPosition + proj.Size / 2f, proj.oldPos.Length, includeBacksides: true);
 			_vertexStrip.DrawTrail();
 			Main.pixelShader.CurrentTechnique.Passes[0].Apply();
 		}
 
-		public static ZenithProfileType GetZenithProfileType(int usedSwordId)
+		public static ZenithProfileType GetZenithProfile(int usedSwordId)
 		{
-			if (!_fractalProfiles.TryGetValue(usedSwordId, out ZenithProfileType value))
+			if (!_ZenithProfiles.TryGetValue(usedSwordId, out ZenithProfileType value))
 			{
 				return _defaultProfile;
 			}

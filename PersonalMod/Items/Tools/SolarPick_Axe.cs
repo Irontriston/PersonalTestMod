@@ -19,14 +19,14 @@ namespace PersonalMod.Items.Tools
         }
         public override void SetDefaults()
 		{
-			item.damage = 300;
+			item.damage = 75;
 			item.melee = true;
 			item.useTurn = true;
 			item.autoReuse = true;
 
 			item.width = 40;
 			item.height = 40;
-			item.useTime = 4;
+			item.useTime = 5;
 			item.useAnimation = 5;
 			item.useStyle = ItemUseStyleID.SwingThrow;
 			item.knockBack = 3;
@@ -43,7 +43,7 @@ namespace PersonalMod.Items.Tools
         {
 			ModRecipe recipe = new ModRecipe(mod);
 			recipe.AddIngredient(mod.ItemType("Solarium"), 18);
-			recipe.AddTile(TileID.Anvils);
+			recipe.AddTile(TileID.MythrilAnvil);
 			recipe.SetResult(this);
 			recipe.AddRecipe();
 		}

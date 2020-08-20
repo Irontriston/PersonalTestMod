@@ -15,11 +15,11 @@ namespace PersonalMod.Prefixes
 	{
 
 		internal static List<byte> MeleePrefixes = new List<byte>();
-		internal float DamageMult;
-		internal float InvAttackSpeedMult;
-		internal float KnockbackMult;
-		internal float ItemSizeMult;
-		internal int CritChanceMod;
+		internal float DamageMult = 1f;
+		internal float InvAttackSpeedMult = 1f;
+		internal float KnockbackMult = 1f;
+		internal float ItemSizeMult = 1f;
+		internal int CritChanceMod = 0;
 
 		// see documentation for vanilla weights and more information
 		// note: a weight of 0f can still be rolled. see CanRoll to exclude prefixes.
@@ -44,10 +44,10 @@ namespace PersonalMod.Prefixes
 		{
 			if (base.Autoload(ref name))
 			{
-				AddMeleePrefix(mod, MeleePrefixTypes.Lunarite    , 1.166f, 1.125f, 0.833f, 1.066f, 6 );
-				AddMeleePrefix(mod, MeleePrefixTypes.Celestialite, 1.33f , 1.25f , 0.666f, 1.133f, 13);
-				AddMeleePrefix(mod, MeleePrefixTypes.Solaric     , 1.66f , 1.433f, 0.5f  , 1.2f  , 25);
-				AddMeleePrefix(mod, MeleePrefixTypes.Galactic    , 2.0f  , 1.625f, 0.333f, 1.33f , 43);
+				AddMeleePrefix(mod, MeleePrefixTypes.Lunarite    , 1.166f, 1.125f, 0.833f, 1.033f, 6 );
+				AddMeleePrefix(mod, MeleePrefixTypes.Celestialite, 1.33f , 1.25f , 0.666f, 1.067f, 13);
+				AddMeleePrefix(mod, MeleePrefixTypes.Solaric     , 1.66f , 1.433f, 0.5f  , 1.1f  , 25);
+				AddMeleePrefix(mod, MeleePrefixTypes.Galactic    , 2.0f  , 1.625f, 0.333f, 1.167f , 43);
 			}
 
 			return false;

@@ -19,8 +19,8 @@ using static Terraria.ModLoader.ModContent;
 
 namespace PersonalMod.NeededProperties
 {
-    public static class Util_Properties
-    {
+	public static class Util_Properties
+	{
 		public static float GetLerpValue(float from, float to, float t, bool clamped = false)
 		{
 			if (clamped)
@@ -131,6 +131,52 @@ namespace PersonalMod.NeededProperties
 		{
 			return Vector2.Normalize(Target - Origin);
 		}
-	}
+		public static Vector2 RotTransform(Vector2 RotCenter, Vector2 slope, Vector2 position)
+		{
+			Vector2 PosDirections = RotCenter; // Basically the center's original position.
+			Vector2 RotPos = position - PosDirections;
 
+			double Rads = Math.Atan(slope.Y / slope.X) * (Math.PI / 180);  //These three steps combined are needed as Cosine and Sine use Radians.
+
+			double CosValue = Math.Cos(Rads);
+			double SinValue = Math.Sin(Rads);
+
+			Vector2 RotAdjust = new Vector2((float)((RotPos.X * CosValue) + (RotPos.Y * -SinValue))
+										   ,(float)((RotPos.X * SinValue) + (RotPos.Y *  CosValue)));
+
+			position = RotAdjust + PosDirections;
+			return position;
+		}
+		public static Vector2 RotPerc( Vector2 slope)
+		{
+			double SlopeValue = slope.Y / slope.X;   //Reversed so as to not confuse modders when defining slope
+			double Degrees = Math.Atan(SlopeValue);
+			double Rads = Degrees * (Math.PI / 180);  //These three steps are needed as Cosine and Sine use Radians.
+
+			double CosValue = Math.Cos(Rads);
+			double SinValue = Math.Sin(Rads);
+
+			Vector2 RotAdjust = new Vector2(1,0);
+
+			RotAdjust = new Vector2((float)((RotAdjust.X * CosValue) - (RotAdjust.Y * SinValue))
+								   ,(float)((RotAdjust.X * SinValue) + (RotAdjust.Y * CosValue)));
+			return RotAdjust;
+		}
+		public static float LinterpValue(Vector2 StartPoint, Vector2 EndPoint)
+		{
+			return EndPoint.Y - StartPoint.Y / EndPoint.X - StartPoint.X;
+		}
+		public static float DistanceFloat(Vector2 StartPoint, Vector2 EndPoint)
+		{
+			double XDistance = Math.Pow(EndPoint.X - StartPoint.X, 2);
+			double YDistance = Math.Pow(EndPoint.Y - StartPoint.Y, 2);
+			float Distance = (float)Math.Sqrt(XDistance + YDistance);
+			return Distance;
+		}
+		public static Vector2 DistanceVector(Vector2 StartPoint, Vector2 EndPoint)
+		{
+			return new Vector2(EndPoint.X - StartPoint.X, EndPoint.Y - StartPoint.Y);
+		}
+
+	}
 }

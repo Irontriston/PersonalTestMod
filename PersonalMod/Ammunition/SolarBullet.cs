@@ -18,7 +18,7 @@ namespace PersonalMod.Ammunition
             item.consumable = true;
             item.maxStack = 999;
             item.ranged = true;
-            item.damage = 250;
+            item.damage = 125;
             item.knockBack = 0.5f;
 
             item.shoot = mod.ProjectileType("SolarProjectile");
@@ -29,7 +29,7 @@ namespace PersonalMod.Ammunition
         {
             ModRecipe recipe = new ModRecipe(mod);
             recipe.AddIngredient(mod.ItemType("Solarium"));
-            recipe.AddTile(TileID.Anvils);
+            recipe.AddTile(TileID.MythrilAnvil);
             recipe.SetResult(this, 50);
             recipe.AddRecipe();
         }

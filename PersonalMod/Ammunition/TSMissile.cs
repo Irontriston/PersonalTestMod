@@ -22,13 +22,14 @@ namespace PersonalMod.Ammunition
         {
             item.damage = 500;
             item.ranged = true;
-            item.width = 11;
-            item.height = 19;
+            item.width = 20;
+            item.height = 14;
             item.maxStack = 999;
             item.consumable = true;
             item.knockBack = 2.5f;
             item.value = Item.sellPrice(silver: 50);
             item.rare = ItemRarityID.Cyan;
+            item.shootSpeed = 5f;
             item.shoot = mod.ProjectileType("TSMissileProj");
             item.ammo = 771; //AmmoID.Rocket
         }
@@ -36,7 +37,7 @@ namespace PersonalMod.Ammunition
         {
             ModRecipe recipe = new ModRecipe(mod);
             recipe.AddIngredient(mod.ItemType("Solarium"));
-            recipe.AddTile(TileID.Anvils);
+            recipe.AddTile(TileID.MythrilAnvil);
             recipe.SetResult(this, 25);
             recipe.AddRecipe();
         }

@@ -18,29 +18,27 @@ namespace PersonalMod.Prefixes
 		internal float KnockbackMult;
 		internal float InvAttackSpeedMult;
 		internal float ShootSpeedMult;
-		internal float ManaMult;
 		internal int CritChanceMod;
 		public override PrefixCategory Category { get { return PrefixCategory.AnyWeapon; } }
 
 		public UniversalPrefix() { }
 
-		public UniversalPrefix(float DamageMult = 1.0f, float KnockbackMult = 1.0f, float InvAttackSpeedMult = 1.0f, float ShootSpeedMult = 1.0f, float ManaMult = 1.0f, int CritChanceMod = 0)
+		public UniversalPrefix(float DamageMult = 1.0f, float KnockbackMult = 1.0f, float InvAttackSpeedMult = 1.0f, float ShootSpeedMult = 1.0f, int CritChanceMod = 0)
 		{
 			this.DamageMult = DamageMult;
 			this.KnockbackMult = KnockbackMult;
 			this.InvAttackSpeedMult = InvAttackSpeedMult;
 			this.ShootSpeedMult = ShootSpeedMult;
-			this.ManaMult = ManaMult;
 			this.CritChanceMod = CritChanceMod;
 		}
 		public override bool Autoload(ref string name)
 		{
 			if (base.Autoload(ref name))
 			{
-				AddUniversalPrefix(mod, UniversalPrefixTypes.Orbital         ,1.1f ,1.1f  ,0.9f  ,1.1f,  0.75f, 13);
-				AddUniversalPrefix(mod, UniversalPrefixTypes.Extraterrestrial,1.25f,1.2f  ,0.75f ,1.2f,0.5625f, 25);
-				AddUniversalPrefix(mod, UniversalPrefixTypes.Imperial        ,1.45f,1.333f,0.55f ,1.3f,0.3125f, 38);
-				AddUniversalPrefix(mod, UniversalPrefixTypes.ArchGodly       ,1.75f,1.5f  ,0.333f,1.4f,  0.1f , 50);
+				AddUniversalPrefix(mod, UniversalPrefixTypes.Orbital         ,1.1f ,1.1f  ,0.9f  ,1.1f, 13);
+				AddUniversalPrefix(mod, UniversalPrefixTypes.Extraterrestrial,1.25f,1.2f  ,0.75f ,1.2f, 25);
+				AddUniversalPrefix(mod, UniversalPrefixTypes.Imperial        ,1.45f,1.333f,0.55f ,1.3f, 38);
+				AddUniversalPrefix(mod, UniversalPrefixTypes.ArchGodly       ,1.75f,1.5f  ,0.333f,1.4f, 50);
 			}
 			return false;
 		}
@@ -54,12 +52,11 @@ namespace PersonalMod.Prefixes
 			KnockbackMult = this.KnockbackMult;
 			InvAttackSpeedMult = this.InvAttackSpeedMult;
 			ShootSpeedMult = this.ShootSpeedMult;
-			ManaMult = this.ManaMult;
 			CritChanceMod = this.CritChanceMod;
 		}
-		static void AddUniversalPrefix(Mod mod, UniversalPrefixTypes prefixType, float DamageMult = 1.0f, float KnockbackMult = 1.0f, float InvAttackSpeedMult = 1.0f, float ShootSpeedMult = 1.0f , float ManaMultMult = 1.0f, int CritChanceMod = 0)
+		static void AddUniversalPrefix(Mod mod, UniversalPrefixTypes prefixType, float DamageMult = 1.0f, float KnockbackMult = 1.0f, float InvAttackSpeedMult = 1.0f, float ShootSpeedMult = 1.0f , int CritChanceMod = 0)
 		{
-			mod.AddPrefix(prefixType.ToString(), new UniversalPrefix(DamageMult, KnockbackMult, InvAttackSpeedMult,ShootSpeedMult , ManaMultMult, CritChanceMod));
+			mod.AddPrefix(prefixType.ToString(), new UniversalPrefix(DamageMult, KnockbackMult, InvAttackSpeedMult,ShootSpeedMult , CritChanceMod));
 			UniversalPrefixes.Add(mod.GetPrefix(prefixType.ToString()).Type);
 		}
 	}

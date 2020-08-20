@@ -18,23 +18,24 @@ namespace PersonalMod.Projectiles
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Techno-Solaran Missile");
-        }
+			ProjectileID.Sets.TrailCacheLength[projectile.type] = 5;
+			ProjectileID.Sets.TrailingMode[projectile.type] = 0;
+		}
 		public override void SetDefaults()
 		{
 			// while the sprite is actually bigger than 15x15, we use 15x15 since it lets the projectile clip into tiles as it bounces. It looks better.
-			projectile.width = 11;
-			projectile.height = 19;
+			projectile.width = 14;
+			projectile.height = 20;
 			projectile.aiStyle = 16;
 			projectile.friendly = true;
 			projectile.ranged = true;
-			projectile.penetrate = -1;
+
 			projectile.alpha = 1;
-			projectile.damage = 500;
+			projectile.timeLeft = 600;
 
 			projectile.ignoreWater = true;
 			projectile.tileCollide = true;
 			// 5 second fuse.
-			projectile.timeLeft = 3600;
 
 		}
 
@@ -65,13 +66,8 @@ namespace PersonalMod.Projectiles
 				projectile.alpha = 255;
 				// change the hitbox size, centered about the original projectile center. This makes the projectile damage enemies during the explosion.
 				projectile.position = projectile.Center;
-				projectile.position.X += projectile.width / 2;
-				projectile.position.Y += projectile.height / 2;
 				projectile.width = 200;
 				projectile.height = 200;
-				projectile.position.X -= projectile.width / 2;
-				projectile.position.Y -= projectile.height / 2;
-				projectile.knockBack = 10f;
 				projectile.Center = projectile.position;
 				//projectile.position.X = projectile.position.X - (float)(projectile.width / 2);
 				//projectile.position.Y = projectile.position.Y - (float)(projectile.height / 2);
@@ -100,8 +96,8 @@ namespace PersonalMod.Projectiles
 		{
 			projectile.position.X += projectile.width / 2;
 			projectile.position.Y += projectile.height / 2;
-			projectile.width = 80;
-			projectile.height = 80;
+			projectile.width = 11;
+			projectile.height = 19;
 			projectile.position.X -= projectile.width / 2;
 			projectile.position.Y -= projectile.height / 2;
 			// Smoke Dust spawn

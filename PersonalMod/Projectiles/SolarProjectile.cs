@@ -28,6 +28,7 @@ namespace PersonalMod.Projectiles
             projectile.timeLeft = 320;
 
             projectile.penetrate = 6;
+            projectile.extraUpdates = 1;
             projectile.ranged = true;
             projectile.ignoreWater = true;
             projectile.arrow = false;
@@ -36,10 +37,14 @@ namespace PersonalMod.Projectiles
         {
             for (int i = 0; i < 5; i++)
             {
-                int Bounce  = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, mod.DustType("TrailOne"), 0f, 0f, 100, default(Color), 2f);
+                int Bounce = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, mod.DustType("TrailOne"), 0.5f, 0.5f, 100, default(Color), 1f);
                 Main.dust[Bounce].noGravity = true;
                 Main.dust[Bounce].velocity *= 5f;
                 
+            }
+            if (projectile.velocity.X != oldVelocity.X && Math.Abs(oldVelocity.X) > 1f)
+            {
+                projectile.velocity.X = oldVelocity.X * -0.75f;
             }
             if (projectile.velocity.Y != oldVelocity.Y && Math.Abs(oldVelocity.Y) > 1f)
             {
@@ -55,10 +60,10 @@ namespace PersonalMod.Projectiles
                 projectile.timeLeft = 20;
             }
 
-            if (projectile.owner == Main.myPlayer && projectile.timeLeft <= 20)
+            if (projectile.owner == Main.myPlayer && projectile.timeLeft <= 23)
             {
                 projectile.alpha = 255;
-                projectile.velocity = new Vector2 (0, 0);
+                projectile.velocity *= 0;
                 projectile.position = projectile.Center;
                 projectile.width = 125;
                 projectile.height = 125;
@@ -67,26 +72,24 @@ namespace PersonalMod.Projectiles
                 projectile.penetrate = -1;
                 projectile.damage = 1000;
 
-                for (int i = 0; i < 5; i++)
-                {
-                    int Expl = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), (int)projectile.width, (int)projectile.height, mod.DustType("TrailOne"), 0f, 0f, 50, default(Color), 1.25f);
-                    Main.dust[Expl].noGravity = true;
-                    Main.dust[Expl].velocity *= 0f;
-
-                }
             }
 
 
             Lighting.AddLight(projectile.position, 1.5f, 0.375f, 0f);
-            for (int num163 = 0; num163 < 2; num163++)
+            if(projectile.owner == Main.myPlayer && projectile.timeLeft >= 23)
             {
-                float x2 = projectile.position.X - projectile.velocity.X / 10f * (float)num163;
-                float y2 = projectile.position.Y - projectile.velocity.Y / 10f * (float)num163;
-                int Trail = Dust.NewDust(new Vector2(x2, y2), 1, 1, DustType<TrailOne>(), 0f, 0f, 0, default, 1f);
-                Main.dust[Trail].velocity *= 0f;
-                Main.dust[Trail].noGravity = true;
-            }
+                float SpeedAlter = Main.rand.NextFloat(0.875f, 1.125f);
 
+               for (int num163 = 0; num163 < 1; num163++)
+               {
+                  float x2 = projectile.position.X - projectile.velocity.X / 10f * (float)num163;
+                  float y2 = projectile.position.Y - projectile.velocity.Y / 10f * (float)num163;
+                  int Trail = Dust.NewDust(new Vector2(x2, y2), projectile.width, projectile.height, DustType<TrailOne>(), projectile.velocity.X / 10, projectile.velocity.Y / 10, 50, default, 1f);
+                  Main.dust[Trail].velocity *= SpeedAlter;
+                  Main.dust[Trail].rotation = projectile.rotation;
+                  Main.dust[Trail].noGravity = true;
+               }
+            }
 
 
             if (projectile.localAI[0] == 0f)
@@ -96,7 +99,7 @@ namespace PersonalMod.Projectiles
             }
 
             Vector2 move = Vector2.Zero;
-            float distance = 1000f;
+            float distance = 500f;
             bool target = false;
             for (int k = 0; k < 200; k++)
             {
@@ -116,7 +119,7 @@ namespace PersonalMod.Projectiles
             if (target)
             {
                 AdjustMagnitude(ref move);
-                projectile.velocity = (13.5f * projectile.velocity + move) / 13.75f;
+                projectile.velocity = (13.625f * projectile.velocity + move) / 13.75f;
                 AdjustMagnitude(ref projectile.velocity);
             }
         }
@@ -124,9 +127,24 @@ namespace PersonalMod.Projectiles
         private void AdjustMagnitude(ref Vector2 vector)
         {
             float magnitude = (float)Math.Sqrt(vector.X * vector.X + vector.Y * vector.Y);
-            if (magnitude > 37.5f)
+            if (magnitude > 62.5f)
             {
-                vector *= 37.5f / magnitude;
+                vector *= 62.5f / magnitude;
+            }
+        }
+        public override void Kill(int timeLeft)
+        {
+            float dustSpeed = Main.rand.NextFloat(0.1f, 5f);
+            projectile.position = projectile.Center;
+            projectile.width = 8;
+            projectile.height = 12;
+            projectile.Center = projectile.position;
+
+            for (int num854 = 0; num854 < 5; num854++)
+            {
+                int num855 = Dust.NewDust(projectile.Center, projectile.width, projectile.height, DustType<TrailOne>(), 0f, 0f, 100, default(Color), 1.5f);
+                Dust dust = Main.dust[num855];
+                dust.velocity *= 1.4f;
             }
         }
     }

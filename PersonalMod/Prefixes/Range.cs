@@ -14,29 +14,27 @@ namespace PersonalMod.Prefixes
     class RangedPrefix : ModPrefix
 	{
 		internal static List<byte> RangedPrefixes = new List<byte>();
-		internal float DamageMult;
-		internal float KnockbackMult;
-		internal float InvAttackSpeedMult;
-		internal float ShootSpeedMult;
-		internal int CritChanceMod;
+		internal float DamageMult = 1f;
+		internal float KnockbackMult = 1f;
+		internal float InvAttackSpeedMult = 1f;
+		internal float ShootSpeedMult = 1f;
 		public override PrefixCategory Category { get { return PrefixCategory.Ranged; } }
 		public RangedPrefix() { }
-		public RangedPrefix(float DamageMult = 1.0f, float KnockbackMult = 1.0f, float InvAttackSpeedMult = 1.0f, float ShootSpeedMult = 1.0f, int CritChanceMod = 0)
+		public RangedPrefix(float DamageMult = 1.0f, float KnockbackMult = 1.0f, float InvAttackSpeedMult = 1.0f, float ShootSpeedMult = 1.0f)
 		{
 			this.DamageMult = DamageMult;
 			this.KnockbackMult = KnockbackMult;
 			this.InvAttackSpeedMult = InvAttackSpeedMult;
 			this.ShootSpeedMult = ShootSpeedMult;
-			this.CritChanceMod = CritChanceMod;
 		}
 		public override bool Autoload(ref string name)
 		{
 			if (base.Autoload(ref name))
 			{
-				AddRangedPrefix(mod, RangedPrefixTypes.Lunar_Shelled       ,1.0625f,1.166f,0.875f,1.05f ,3 );
-				AddRangedPrefix(mod, RangedPrefixTypes.Spacially_Bound     ,1.125f ,1.25f ,0.666f,1.125f,8 );
-				AddRangedPrefix(mod, RangedPrefixTypes.Sol_Shelled         ,1.25f  ,1.333f,0.5f  ,1.2f  ,13);
-				AddRangedPrefix(mod, RangedPrefixTypes.Time_Spacially_Bound,1.5f   ,1.5f  ,0.333f,1.333f,20);
+				AddRangedPrefix(mod, RangedPrefixTypes.LunarShelled       ,1.0625f,1.166f,0.875f,1.05f );
+				AddRangedPrefix(mod, RangedPrefixTypes.SpaciallyBound     ,1.125f ,1.25f ,0.666f,1.125f);
+				AddRangedPrefix(mod, RangedPrefixTypes.SolShelled         ,1.25f  ,1.333f,0.5f  ,1.2f  );
+				AddRangedPrefix(mod, RangedPrefixTypes.TimeSpaciallyBound,1.5f   ,1.5f   ,0.333f,1.333f);
 			}
 
 			return false;
@@ -51,21 +49,20 @@ namespace PersonalMod.Prefixes
 			KnockbackMult = this.KnockbackMult;
 			InvAttackSpeedMult = this.InvAttackSpeedMult;
 			ShootSpeedMult = this.ShootSpeedMult;
-			CritChanceMod = this.CritChanceMod;
 		}
-		static void AddRangedPrefix(Mod mod, RangedPrefixTypes prefixType, float DamageMult = 1.0f, float KnockbackMult = 1.0f, float InvAttackSpeedMult = 1.0f, float ShootSpeedMult = 1.0f, int CritChanceMod = 0)
+		static void AddRangedPrefix(Mod mod, RangedPrefixTypes prefixType, float DamageMult = 1.0f, float KnockbackMult = 1.0f, float InvAttackSpeedMult = 1.0f, float ShootSpeedMult = 1.0f)
 		{
-			mod.AddPrefix(prefixType.ToString(), new MagicPrefix(DamageMult, KnockbackMult, InvAttackSpeedMult, ShootSpeedMult, CritChanceMod));
+			mod.AddPrefix(prefixType.ToString(), new MagicPrefix(DamageMult, KnockbackMult, InvAttackSpeedMult, ShootSpeedMult));
 			RangedPrefixes.Add(mod.GetPrefix(prefixType.ToString()).Type);
 		}
 	}
 	public enum RangedPrefixTypes : byte
 	{
 		None,
-		Lunar_Shelled,
-		Spacially_Bound,
-		Sol_Shelled,
-		Time_Spacially_Bound
+		LunarShelled,
+		SpaciallyBound,
+		SolShelled,
+		TimeSpaciallyBound
 	}
 }
 
